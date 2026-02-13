@@ -13,7 +13,10 @@ set(MODULE_PYTHON_SCRIPTS
 
 set(MODULE_PYTHON_RESOURCES
   Resources/Icons/${MODULE_NAME}.png
-  Resources/Icons/ToggleEdges.svg
+  # Icons/ToggleEdges.svg is deliberately not listed here. Scripted module resources all land in
+  # the shared qt-scripted-modules/Resources directory that resourcePath() resolves against, so
+  # ClipVessel's identical copy is the one this module picks up at runtime. Listing it in both
+  # modules makes two custom commands write the same output and CMake refuses to configure.
   Resources/Icons/ToggleClipping.svg
   Resources/UI/${MODULE_NAME}.ui
   )

@@ -20,6 +20,7 @@ set(SUPERBUILD_TOPLEVEL_PROJECT inner)
 
 #-----------------------------------------------------------------------------
 # Extension dependencies
+find_package(Slicer COMPONENTS ConfigurePrerequisites REQUIRED)
 find_package(Slicer REQUIRED)
 include(${Slicer_USE_FILE})
 mark_as_superbuild(Slicer_DIR)
@@ -30,7 +31,7 @@ mark_as_superbuild(GIT_EXECUTABLE)
 option(SlicerVMTK_USE_ExtraMarkups
   "This needs to be disabled if ExtraMarkups Slicer extension is unavailable" ON)
 
-if(SlicerVMTK_USE_ExtraMarkups)
+if(SlicerVMTK_USE_ExtraMarkups AND NOT DEFINED Slicer_EXTENSION_SOURCE_DIRS)
   find_package(ExtraMarkups REQUIRED)
   mark_as_superbuild(ExtraMarkups_DIR)
 endif()
