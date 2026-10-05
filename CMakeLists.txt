@@ -9,8 +9,8 @@ set(EXTENSION_CATEGORY "Vascular Modeling Toolkit")
 set(EXTENSION_CONTRIBUTORS "Daniel Haehn (Boston Childrens Hospital), Luca Antiga (Orobix), Steve Pieper (Isomics), Jean-Christophe Fillion-Robin (Kitware)")
 set(EXTENSION_DESCRIPTION "Vascular Modeling Toolkit for vessel tree segmentation and centerline extraction.")
 set(EXTENSION_STATUS "Beta")
-set(EXTENSION_ICONURL "https://www.nitrc.org/project/screenshot.php?group_id=196&screenshot_id=269")
-set(EXTENSION_SCREENSHOTURLS "https://www.nitrc.org/project/screenshot.php?group_id=196&screenshot_id=126 https://www.nitrc.org/project/screenshot.php?group_id=196&screenshot_id=227 https://www.nitrc.org/project/screenshot.php?group_id=196&screenshot_id=228 https://www.nitrc.org/project/screenshot.php?group_id=196&screenshot_id=229")
+set(EXTENSION_ICONURL "https://raw.githubusercontent.com/vmtk/SlicerExtension-VMTK/master/SlicerVMTK.png")
+set(EXTENSION_SCREENSHOTURLS "https://raw.githubusercontent.com/vmtk/SlicerExtension-VMTK/master/Docs/SlicerVMTK_Screenshot_1.png https://raw.githubusercontent.com/vmtk/SlicerExtension-VMTK/master/Docs/SlicerVMTK_Screenshot_2.png https://raw.githubusercontent.com/vmtk/SlicerExtension-VMTK/master/Docs/SlicerVMTK_Screenshot_3.png https://raw.githubusercontent.com/vmtk/SlicerExtension-VMTK/master/Docs/SlicerVMTK_Screenshot_4.png")
 set(EXTENSION_DEPENDS "ExtraMarkups")
 set(EXTENSION_LICENSE_FILE ${Slicer_LICENSE_FILE})
 set(EXTENSION_README_FILE ${Slicer_README_FILE})
@@ -28,8 +28,10 @@ mark_as_superbuild(Slicer_DIR)
 find_package(Git REQUIRED)
 mark_as_superbuild(GIT_EXECUTABLE)
 
+# The modules that need the ExtraMarkups extension are built where it is available.
+find_package(ExtraMarkups QUIET)
 option(SlicerVMTK_USE_ExtraMarkups
-  "This needs to be disabled if ExtraMarkups Slicer extension is unavailable" ON)
+  "Build the modules that need the ExtraMarkups Slicer extension" ${ExtraMarkups_FOUND})
 
 if(SlicerVMTK_USE_ExtraMarkups AND NOT DEFINED Slicer_EXTENSION_SOURCE_DIRS)
   find_package(ExtraMarkups REQUIRED)

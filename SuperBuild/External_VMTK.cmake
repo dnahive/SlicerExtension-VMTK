@@ -55,7 +55,7 @@ if(NOT DEFINED ${proj}_DIR AND NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
   if(${Slicer_VERSION_MAJOR}.${Slicer_VERSION_MINOR} VERSION_GREATER_EQUAL 5.1)
     # Slicer >= 5.1 uses recent ITK-5.3RC version, which has BooleanStdVectorType
     # (see https://github.com/InsightSoftwareConsortium/ITK/commit/bc9ba8540f96c0fa4e9100b25b05eb812074a64e)
-    set(DEFAULT_VMTK_TAG d8f45c1b8c276e1aaf5e19a7ae16320b5df6b03b)
+    set(DEFAULT_VMTK_TAG 7efa98cc8e6253dd2c566beffff81f36056edf64)
   else()
     # Slicer < 5.1 uses older ITK-5.3RC version, which does not yet have BooleanStdVectorType
     set(DEFAULT_VMTK_TAG 30b0fdad5674d6f134e8a8b601bcef7917671b0a)
@@ -119,6 +119,9 @@ if(NOT DEFINED ${proj}_DIR AND NOT ${CMAKE_PROJECT_NAME}_USE_SYSTEM_${proj})
       # we don't want superbuild since it will override our CMake settings
       -DVMTK_USE_SUPERBUILD:BOOL=OFF
       -DVMTK_CONTRIB_SCRIPTS:BOOL=ON
+      # The Contrib classes: vtkvmtkConcaveAnnularCapPolyData is a capping method of the CFD Mesh
+      # Generator module
+      -DVTK_VMTK_CONTRIB:BOOL=ON
       -DVMTK_MINIMAL_INSTALL:BOOL=OFF
       -DVMTK_ENABLE_DISTRIBUTION:BOOL=OFF
       -DVMTK_WITH_LIBRARY_VERSION:BOOL=OFF
